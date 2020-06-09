@@ -46,15 +46,23 @@ class Activation_ReLU:
 layer1 = Layer_Dense(2,3)
 activation1 = Activation_ReLU()
 
-#layer2 = Layer_Dense(3,200)
-#layer3 = Layer_Dense(200,200)
-#layer4 = Layer_Dense(200,3)
 
 layer1.forward(X)
 activation1.forward(layer1.output)
 
-#layer2.forward(layer1.output)
-#layer3.forward(layer2.output)
-#layer4.forward(layer3.output)
+print('inputs values:')
 print(layer1.output[:5])
+
+print('actication ouput:')
 print(activation1.output[:5])
+
+exp_values = np.exp(layer1.output)
+print('exponentiated values:')
+print(exp_values[:5])
+
+
+norm_values = exp_values / np.sum(exp_values)
+print('normalized exponentiated values:')
+print(norm_values[:5])
+print('sum of normalized values:', np.sum(norm_values))
+
