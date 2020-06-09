@@ -4,6 +4,7 @@ import tensorflow as tf
 
 np.random.seed(0)
 
+"""
 def create_data(points, classes):
     X = np.zeros((points*classes, 2))
     y = np.zeros(points*classes, dtype='uint8')
@@ -16,7 +17,7 @@ def create_data(points, classes):
     return X, y
 
 X, y = create_data(2, 3)
-
+"""
 
 class Layer_Dense:
     def __init__(self, n_inputs, n_neurons):
