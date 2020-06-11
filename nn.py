@@ -19,18 +19,38 @@ def create_data(points, classes):
 X, y = create_data(2, 3)
 """
 
+
+
 class Layer_Dense:
-    def __init__(self, n_inputs, n_neurons):
+
+    def __init__(self, n_inputs, n_neurons, data, activation_m):
         self.weights = 0.10 * np.random.randn(n_inputs, n_neurons)
         self.biases = np.zeros((1, n_neurons))
+        self._forward = self.forward(data)
+        self.activation_method = self.activation_method(self._forward, activation_m)
+
+
+    # Forward pass
     def forward(self, inputs):
         self.output = np.dot(inputs, self.weights) + self.biases
+        return self.output
+
+
+    def activation_method(self, data, activation_m):
+        if activation_m == 'relu':
+            return Activation_ReLU.forward(self, data)
+        if activation_m == 'softmax':
+            return Activation_Softmax.forward(self, data)
+
+
 
 
 class Activation_ReLU:
-
+    
+    # Forward pass
     def forward(self, inputs):
         self.output = np.maximum(0, inputs)
+
 
 
 class Activation_Softmax:
@@ -44,7 +64,7 @@ class Activation_Softmax:
         probabilities = exp_values / np.sum(exp_values, axis=1, keepdims=True)
 
         self.output = probabilities
-
+        return self.output
 
 
 
@@ -65,3 +85,4 @@ loss = -(math.log(softmax_output[0])*target_output[0] +
 
 print(loss)
 """
+
