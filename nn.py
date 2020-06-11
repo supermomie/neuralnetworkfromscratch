@@ -66,6 +66,24 @@ class Activation_Softmax:
         self.output = probabilities
         return self.output
 
+# Cross-entropy loss
+class Loss_CategoricalCrossentropy:
+
+    def forward(self, y_pred, y_true):
+
+        # Number of samples in a batch
+        samples = len(y_pred)
+
+        # Probabilities for target values
+        y_pred = y_pred[range(samples), y_true]
+
+        # Losses
+        negative_log_likelihoods = -np.log(y_pred)
+
+        # Overall loss
+        data_loss = np.mean(negative_log_likelihoods)
+        return data_loss
+
 
 
 
